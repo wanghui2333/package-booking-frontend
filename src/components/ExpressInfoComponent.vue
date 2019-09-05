@@ -1,7 +1,15 @@
 <template>
-  <a-table :columns="columns" :dataSource="data" :rowKey="record => record.id" >
+  <a-table :columns="columns" :dataSource="data" :rowKey="record => record.id">
     <span slot="action" slot-scope="text, record">
-      <a v-show="record.status != '已取件'" @click="confirmGoods(record)">确认收货</a>
+      <a-popconfirm
+        title="确定收货吗?"
+        @confirm="confirmGoods(record)"
+        @cancel="cancel"
+        okText="Yes"
+        cancelText="No"
+      >
+        <a v-show="record.status != '已取件'">确认收货</a>
+      </a-popconfirm>
     </span>
   </a-table>
 </template>
@@ -28,7 +36,7 @@ const columns = [
     dataIndex: "date"
   },
   {
-    scopedSlots: { customRender: 'action' }
+    scopedSlots: { customRender: "action" }
   }
 ];
 
@@ -45,8 +53,12 @@ export default {
   },
   methods: {
     confirmGoods: function(data) {
+      this.$message.success('收货完成');
       data.status = "已取件";
       this.$store.dispatch("patchDataStatus", data);
+    },
+    cancel (e) {
+      this.$message.error('取消确认收货');
     }
   }
 };
