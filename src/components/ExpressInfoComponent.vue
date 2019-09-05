@@ -1,7 +1,7 @@
 <template>
   <a-table :columns="columns" :dataSource="data" :rowKey="record => record.id" >
     <span slot="action" slot-scope="text, record">
-      <a href="javascript:;" v-show="record.status != '已取件'">确认收货</a>
+      <a v-show="record.status != '已取件'" @click="confirmGoods(record)">确认收货</a>
     </span>
   </a-table>
 </template>
@@ -41,6 +41,11 @@ export default {
   computed: {
     data: function() {
       return this.$store.getters.filterData;
+    }
+  },
+  methods: {
+    confirmGoods: function(record) {
+      record.status = "已取件";
     }
   }
 };
