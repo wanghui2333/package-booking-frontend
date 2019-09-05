@@ -44,8 +44,9 @@ export default {
     }
   },
   methods: {
-    confirmGoods: function(record) {
-      record.status = "已取件";
+    confirmGoods: function(data) {
+      data.status = "已取件";
+      this.$store.dispatch("patchDataStatus", data);
     }
   }
 };

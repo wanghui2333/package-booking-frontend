@@ -24,7 +24,7 @@
           <a-icon slot="prefix" type="phone" />
           <a-icon v-if="phone" slot="suffix" type="close-circle" @click="phoneEmpty" />
         </a-input>
-        <br />
+        <br />快递状态：
         <a-select defaultValue="未取件" style="width: 120px" @change="statusChange">
           <a-select-option value="未取件">未取件</a-select-option>
           <a-select-option value="已取件">已取件</a-select-option>
