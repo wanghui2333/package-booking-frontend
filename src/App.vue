@@ -1,24 +1,34 @@
 <template>
   <div id="app">
-    <a-button @click="add">新增</a-button>
-    <Home/>
-    <!-- <router-view /> -->
+    
+    <AddData />
+    <!-- <Home/> -->
+    <router-view />
   </div>
 </template>
 
 <script>
-import Home from './views/Home'
+import AddData from './components/AddData'
 export default {
   created: function() {
     this.$store.dispatch("fetchData");
   },
+  components: {
+    AddData
+  },
   methods: {
     add: function() {
       this.$store.dispatch("addData");
+    },
+    showModal: function () {
+      this.visible = true;
     }
   },
-  components: {
-    Home
+  data: function () {
+    return {
+      visible: false,
+      confirmLoading: false
+    }
   }
 };
 </script>

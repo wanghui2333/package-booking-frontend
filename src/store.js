@@ -10,7 +10,6 @@ export default new Vuex.Store({
   },
   mutations: {
     initData: function (state, data) {
-      console.log(data);
       state.data = data;
     }
   },
@@ -20,15 +19,8 @@ export default new Vuex.Store({
         context.commit("initData", response.data);
       });
     },
-    addData: function (context) {
-      axios.post(url, {
-        "id": "5",
-        "name": "sswang2hui",
-        "phone": "aasd",
-        "status": "done",
-        "date": "2019-09-05 16:18:34"
-      }).then(function (response) {
-        console.log(31, response.data);
+    addData: function (context, data) {
+      axios.post(url, data).then(function (response) {
         context.dispatch("fetchData");
       });
     }

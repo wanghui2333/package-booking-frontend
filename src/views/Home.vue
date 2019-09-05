@@ -1,5 +1,5 @@
 <template>
-  <a-table :columns="columns" :dataSource="data" ></a-table>
+  <a-table :columns="columns" :dataSource="data" :rowKey="record => record.id" ></a-table>
 </template>
 <script>
 const columns = [
