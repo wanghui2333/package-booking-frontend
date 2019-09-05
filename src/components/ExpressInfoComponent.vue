@@ -1,10 +1,22 @@
 <template>
   <a-table :columns="columns" :dataSource="data" :rowKey="data => data.id">
+    <span slot="subscribe" slot-scope="text, data">
+      <a-popconfirm
+        title="确定预约吗?"
+        @confirm="confirmSubscribe(data)"
+        @cancel="cancelSubscribe"
+        okText="Yes"
+        cancelText="No"
+      >
+      <a v-show="data.status === '未取件'">预约</a>
+      <p v-show="data.status === '已预约'">{{ data.date }}</p>
+      </a-popconfirm>
+    </span>
     <span slot="action" slot-scope="text, data">
       <a-popconfirm
         title="确定收货吗?"
         @confirm="confirmGoods(data)"
-        @cancel="cancel"
+        @cancel="cancelGoods"
         okText="Yes"
         cancelText="No"
       >
@@ -33,7 +45,8 @@ const columns = [
   },
   {
     title: "预约时间",
-    dataIndex: "date"
+    dataIndex: "date",
+    scopedSlots: { customRender: "subscribe" }
   },
   {
     scopedSlots: { customRender: "action" }
@@ -57,8 +70,16 @@ export default {
       data.status = "已取件";
       this.$store.dispatch("patchDataStatus", data);
     },
-    cancel (e) {
+    confirmSubscribe: function(data) {
+      this.$message.success('预约成功');
+      data.status = "已预约";
+      // this.$store.dispatch("patchDataStatus", data);
+    },
+    cancelGoods (e) {
       this.$message.error('取消确认收货');
+    },
+    cancelSubscribe (e) {
+      this.$message.error('取消预约');
     }
   }
 };

@@ -22,7 +22,6 @@ export default new Vuex.Store({
     },
     addData: function (context, data) {
       axios.post(url, data).then(function (response) {
-        console.log(25,response.data);
         context.dispatch("fetchData");
       });
     },
