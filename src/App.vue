@@ -1,16 +1,31 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <a-button @click="add">新增</a-button>
+    <Home/>
+    <!-- <router-view /> -->
   </div>
 </template>
 
+<script>
+import Home from './views/Home'
+export default {
+  created: function() {
+    this.$store.dispatch("fetchData");
+  },
+  methods: {
+    add: function() {
+      this.$store.dispatch("addData");
+    }
+  },
+  components: {
+    Home
+  }
+};
+</script>
+
 <style lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
