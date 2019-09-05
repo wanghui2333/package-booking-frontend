@@ -6,7 +6,8 @@ Vue.use(Vuex)
 const url = "http://localhost:9090/express";
 export default new Vuex.Store({
   state: {
-    data: []
+    data: [],
+    currentFilterStatus: "ALL"
   },
   mutations: {
     initData: function (state, data) {
@@ -24,5 +25,16 @@ export default new Vuex.Store({
         context.dispatch("fetchData");
       });
     }
+  },
+  getters: {
+      filterData: function (state) {
+          let filterList = state.data.filter(element => {
+              return (
+                  state.currentFilterStatus === "ALL" ||
+                  state.currentFilterStatus === element.status
+              )
+          });
+          return filterList;
+      }
   }
 })

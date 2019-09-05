@@ -1,33 +1,27 @@
 <template>
   <div id="app">
-    
-    <AddData />
-    <!-- <Home/> -->
+    <h1>{{ title }}</h1>
+    <FilterDataComponent />
+    <AddDataComponent />
     <router-view />
   </div>
 </template>
 
 <script>
-import AddData from './components/AddData'
+import AddDataComponent from './components/AddDataComponent'
+import FilterDataComponent from './components/FilterDataComponent'
+
 export default {
   created: function() {
     this.$store.dispatch("fetchData");
   },
   components: {
-    AddData
+    AddDataComponent,
+    FilterDataComponent
   },
-  methods: {
-    add: function() {
-      this.$store.dispatch("addData");
-    },
-    showModal: function () {
-      this.visible = true;
-    }
-  },
-  data: function () {
+  data: function() {
     return {
-      visible: false,
-      confirmLoading: false
+      title: "菜鸟驿站"
     }
   }
 };
