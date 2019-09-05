@@ -25,7 +25,7 @@
           <a-icon v-if="phone" slot="suffix" type="close-circle" @click="phoneEmpty" />
         </a-input>
         <br />快递状态：
-        <a-select defaultValue="未取件" style="width: 120px" @change="statusChange">
+        <a-select :defaultValue="status" style="width: 120px" @change="statusChange">
           <a-select-option value="未取件">未取件</a-select-option>
           <a-select-option value="已取件">已取件</a-select-option>
           <a-select-option value="已预约">已预约</a-select-option>
@@ -43,7 +43,7 @@ export default {
       id: null,
       name: null,
       phone: null,
-      status: null,
+      status: "未取件",
       visible: false,
       confirmLoading: false
     };

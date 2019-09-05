@@ -1,14 +1,14 @@
 <template>
-  <a-table :columns="columns" :dataSource="data" :rowKey="record => record.id">
-    <span slot="action" slot-scope="text, record">
+  <a-table :columns="columns" :dataSource="data" :rowKey="data => data.id">
+    <span slot="action" slot-scope="text, data">
       <a-popconfirm
         title="确定收货吗?"
-        @confirm="confirmGoods(record)"
+        @confirm="confirmGoods(data)"
         @cancel="cancel"
         okText="Yes"
         cancelText="No"
       >
-        <a v-show="record.status != '已取件'">确认收货</a>
+        <a v-show="data.status != '已取件'">确认收货</a>
       </a-popconfirm>
     </span>
   </a-table>
